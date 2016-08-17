@@ -9,7 +9,7 @@ class Sops < Formula
   depends_on "openssl"
   depends_on :python if MacOS.version <= :snow_leopard
 
-  conflicts_with "/homebrew/core/sops"
+  conflicts_with "homebrew/core/sops"
 
   resource "boto3" do
     url "https://pypi.python.org/packages/source/b/boto3/boto3-1.3.0.tar.gz"
