@@ -2,7 +2,7 @@ class Sops < Formula
   desc "Editor of encrypted files"
   homepage "https://github.com/dictcp/sops"
   url "https://github.com/dictcp/sops/archive/1.14-alpha1.tar.gz"
-  sha256 "4b9daf39485084c5ad8ac5ffbf1b02c0c2c3a6a6724b781a1041b133c6ba1b0c"
+  sha256 "f599e6559a0ed7c1c30c0a34f198e7048045976c7c613b4c4fddc89a9399a3ed"
 
   depends_on "pkg-config" => :build
   depends_on "libyaml"
