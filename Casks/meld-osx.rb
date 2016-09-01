@@ -5,7 +5,7 @@ cask 'meld-osx' do
   url "https://github.com/yousseb/meld/releases/download/osx-9/meldmerge.dmg"
   name 'Meld'
   homepage 'https://yousseb.github.io/meld/'
-  license 'gpl'
+  license :gpl
 
   app 'Meld.app'
 
