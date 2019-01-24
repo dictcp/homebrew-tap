@@ -5,7 +5,6 @@ cask 'intellij-idea-15' do
   url "https://download.jetbrains.com/idea/ideaIU-#{version}-custom-jdk-bundled.dmg"
   name 'IntelliJ IDEA'
   homepage 'https://www.jetbrains.com/idea/'
-  license :commercial
 
   conflicts_with cask: ['intellij-idea', 'intellij-idea-eap']
 
