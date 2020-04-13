@@ -1,4 +1,3 @@
-  
 cask 'kubenav' do
   version "1.13.0"
   sha256 "f7685ca9162f42f43076d4c9b495f96c1fc4b3b2fdbe094c06bc941900eafea1"
