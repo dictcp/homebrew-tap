@@ -1,0 +1,116 @@
+name: Check Homebrew Formula/Cask Updates
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check-updates:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Tap this repository into Homebrew
+        run: brew tap dictcp/tap "$GITHUB_WORKSPACE"
+
+      - name: Run brew livecheck
+        run: |
+          brew livecheck \
+            --tap dictcp/tap \
+            --newer-only \
+            --json \
+            2>/dev/null > livecheck-results.json \
+            || echo "[]" > livecheck-results.json
+
+          echo "=== Livecheck results ==="
+          cat livecheck-results.json
+
+      - name: Apply updates
+        run: python3 .github/scripts/check_updates.py
+
+      - name: Detect changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "No formula/cask changes to commit."
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected:"
+            git diff --stat
+          fi
+
+      - name: Create branch and open PR
+        if: steps.changes.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="brew-updates/$(date +%Y-%m-%d)"
+          DATE="$(date +%Y-%m-%d)"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Check if the branch already exists remotely; append a counter if needed
+          SUFFIX=0
+          BASE_BRANCH="$BRANCH"
+          while git ls-remote --exit-code origin "refs/heads/$BRANCH" > /dev/null 2>&1; do
+            SUFFIX=$((SUFFIX + 1))
+            BRANCH="${BASE_BRANCH}-${SUFFIX}"
+          done
+
+          git checkout -b "$BRANCH"
+          git add Formula/ Casks/ 2>/dev/null || true
+
+          # Build a human-readable summary from the applied-updates.json
+          UPDATES_MD=$(python3 - <<'EOF'
+          import json, sys
+          with open("applied-updates.json") as f:
+              updates = json.load(f)
+          for u in updates:
+              sha_note = "" if u["sha256_updated"] else " *(SHA256 needs manual verification)*"
+              print(f"- **{u['name']}**: `{u['current']}` → `{u['latest']}`{sha_note}")
+          EOF
+          )
+
+          COMMIT_MSG=$(python3 - <<'EOF'
+          import json
+          with open("applied-updates.json") as f:
+              updates = json.load(f)
+          names = ", ".join(u["name"] for u in updates)
+          print(f"chore: update {names}")
+          EOF
+          )
+
+          git commit -m "$COMMIT_MSG"
+          git push -u origin "$BRANCH"
+
+          PR_BODY=$(cat <<PREOF
+          ## Homebrew Formula/Cask Updates — ${DATE}
+
+          The following formulas/casks have been updated to their latest upstream versions by \`brew livecheck\`:
+
+          ${UPDATES_MD}
+
+          ### Notes
+          - Versions and SHA256 checksums were updated automatically where the download URL could be resolved.
+          - Items marked *SHA256 needs manual verification* could not be downloaded automatically; please review those entries before merging.
+
+          ---
+          *Opened automatically by the [Check Homebrew Formula/Cask Updates](${{ github.server_url }}/${{ github.repository }}/actions/workflows/brew-update-check.yml) workflow.*
+          PREOF
+          )
+
+          # Create the PR (ignore error if one already exists for this branch)
+          gh pr create \
+            --title "chore: homebrew formula/cask updates (${DATE})" \
+            --body "$PR_BODY" \
+            --head "$BRANCH" \
+            --base "${{ github.event.repository.default_branch }}" \
+            || echo "PR creation failed or already exists — check the Actions log."
