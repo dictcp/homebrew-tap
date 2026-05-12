@@ -14,8 +14,10 @@ brew tap-pin dictcp/tap  # make sure it overrides the default
 
 | Name | Description | Version | Homepage |
 |------|-------------|---------|----------|
-| `macparakeet` | Fast voice app for Mac with fully local speech and optional AI | 0.6.4 | [https://macparakeet.com](https://macparakeet.com) |
 | `intellij-idea-15` | IntelliJ IDEA | 15.0.6 | [https://www.jetbrains.com/idea/](https://www.jetbrains.com/idea/) |
+| `kubenav` | kubenav | 1.13.0 | [https://kubenav.io/](https://kubenav.io/) |
+| `macparakeet` | Fast voice app for Mac with fully local speech and optional AI | 0.6.4 | [https://macparakeet.com](https://macparakeet.com) |
+| `meld-osx` | Meld | 3.16.0 | [https://yousseb.github.io/meld/](https://yousseb.github.io/meld/) |
 
 <!-- FORMULA-LIST-END -->
 
