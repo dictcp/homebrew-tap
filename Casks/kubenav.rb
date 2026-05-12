@@ -1,10 +1,22 @@
-cask 'kubenav' do
-  version "1.13.0"
-  sha256 "f7685ca9162f42f43076d4c9b495f96c1fc4b3b2fdbe094c06bc941900eafea1"
+cask "kubenav" do
+  version "4.2.3"
+  sha256 "663785d1dfd9fbbfd9abfe5cf5a86dee40fd8c6ce6fd02ed73f446bf28414fb4"
 
-  url "https://github.com/kubenav/kubenav/releases/download/1.3.0/kubenav-1.3.0-darwin-amd64.dmg"
-  name 'kubenav'
-  homepage 'https://kubenav.io/'
+  url "https://github.com/kubenav/kubenav/releases/download/v#{version}/kubenav-macos-universal.zip"
+  name "kubenav"
+  desc "Navigator for your Kubernetes clusters right in your pocket"
+  homepage "https://kubenav.io/"
 
-  app 'kubenav.app'
+  # v5.x dropped macOS desktop binaries; v4.2.3 is the last usable macOS release
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  depends_on macos: ">= :monterey"
+
+  app "kubenav.app"
+  binary "#{appdir}/kubenav.app/Contents/MacOS/kubenav"
+
+  zap trash: "~/Library/Saved Application State/io.kubenav.kubenav.savedState"
 end
