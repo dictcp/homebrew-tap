@@ -14,17 +14,12 @@ brew tap-pin dictcp/tap  # make sure it overrides the default
 | `yq` | Removed — use [`python-yq`](https://github.com/kislyuk/yq) from homebrew-core instead (`brew install python-yq`) |
 | `kubenav` | Removed — project dropped macOS desktop support after v4.2.3; use the mobile app instead |
 | `meld-osx` | Removed — use [`meld`](https://yousseb.github.io/meld/) from homebrew-cask instead (`brew install --cask meld`) |
+| `ffmpeg` | Removed (outdated) — use `ffmpeg` from homebrew-core (`brew install ffmpeg`) |
+| `libcassandra` | Removed (outdated) — use `cassandra-cpp-driver` from homebrew-core |
+| `php70-cassandra` | Removed (outdated, PHP 7.0 EOL) |
+| `php70-memcached` | Removed (outdated, PHP 7.0 EOL) |
 
 <!-- FORMULA-LIST-START -->
-
-## Formulas
-
-| Name | Description | Version | Homepage |
-|------|-------------|---------|----------|
-| `ffmpeg` | Play, record, convert, and stream audio and video | 4.1 | [https://ffmpeg.org/](https://ffmpeg.org/) |
-| `libcassandra` | C and C++ client library to the cassandra server | 2.4.1 | [htt:p://libmemcached.org](htt:p://libmemcached.org) |
-| `php70-cassandra` | DataStax PHP Driver for Apache Cassandra | 1.1.0 | [https://pecl.php.net/package/cassandra](https://pecl.php.net/package/cassandra) |
-| `php70-memcached` | Memcached via libmemcached library | — | [https://pecl.php.net/package/memcached](https://pecl.php.net/package/memcached) |
 
 ## Casks
 
