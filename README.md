@@ -12,6 +12,7 @@ brew tap-pin dictcp/tap  # make sure it overrides the default
 | Name | Reason |
 |------|--------|
 | `yq` | Removed — use [`python-yq`](https://github.com/kislyuk/yq) from homebrew-core instead (`brew install python-yq`) |
+| `kubenav` | Removed — project dropped macOS desktop support after v4.2.3; use the mobile app instead |
 
 <!-- FORMULA-LIST-START -->
 
@@ -29,7 +30,6 @@ brew tap-pin dictcp/tap  # make sure it overrides the default
 | Name | Description | Version | Homepage |
 |------|-------------|---------|----------|
 | `intellij-idea-15` | IntelliJ IDEA | 15.0.6 | [https://www.jetbrains.com/idea/](https://www.jetbrains.com/idea/) |
-| `kubenav` | Navigator for your Kubernetes clusters right in your pocket | 4.2.3 | [https://kubenav.io/](https://kubenav.io/) |
 | `macparakeet` | Fast voice app for Mac with fully local speech and optional AI | 0.6.4 | [https://macparakeet.com](https://macparakeet.com) |
 | `meld-osx` | Visual diff and merge tool | 3.21.0 | [https://yousseb.github.io/meld/](https://yousseb.github.io/meld/) |
 
