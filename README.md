@@ -23,6 +23,8 @@ brew tap-pin dictcp/tap  # make sure it overrides the default
 
 | Name | Reason |
 |------|--------|
+| `kubenav` | Removed — project dropped macOS desktop support after v4.2.3; use the mobile app instead |
+| `meld-osx` | Removed — use [`meld`](https://yousseb.github.io/meld/) from homebrew-cask instead (`brew install --cask meld`) |
 | `ffmpeg` | Removed (outdated) — use `ffmpeg` from homebrew-core (`brew install ffmpeg`) |
 | `libcassandra` | Removed (outdated) — use `cassandra-cpp-driver` from homebrew-core |
 | `php70-cassandra` | Removed (outdated, PHP 7.0 EOL) |
