@@ -14,6 +14,7 @@ brew tap-pin dictcp/tap  # make sure it overrides the default
 
 | Name | Description | Version | Homepage |
 |------|-------------|---------|----------|
+| `alt-tab@10.12` | Enable Windows-like alt-tab | 10.12.0 | [https://alt-tab.app/](https://alt-tab.app/) |
 | `intellij-idea-15` | IntelliJ IDEA | 15.0.6 | [https://www.jetbrains.com/idea/](https://www.jetbrains.com/idea/) |
 | `kubenav` | kubenav | 1.13.0 | [https://kubenav.io/](https://kubenav.io/) |
 | `macparakeet` | Fast voice app for Mac with fully local speech and optional AI | 0.6.4 | [https://macparakeet.com](https://macparakeet.com) |
@@ -31,5 +32,4 @@ brew tap-pin dictcp/tap  # make sure it overrides the default
 | `php70-memcached` | Removed (outdated, PHP 7.0 EOL) |
 | `kubenav` | Desktop version discontinue |
 | `meld-osx` | Removed (outdated) — use `meld` (`brew install --cask meld`) |
-
 
