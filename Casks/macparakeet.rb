@@ -1,6 +1,6 @@
 cask "macparakeet" do
-  version "0.6.4"
-  sha256 "02820e86755c6f2ccdf0a2ee7f234520a25113ae27db48d3c667a96a27919cd8"
+  version "0.8.10"
+  sha256 "a80a4d401ad538dc37c4b2c826b47077064b7f085f3f24cbda481d8219634090"
 
   url "https://github.com/moona3k/macparakeet/releases/download/v#{version}/MacParakeet.dmg"
   name "MacParakeet"
@@ -13,7 +13,8 @@ cask "macparakeet" do
   end
 
   auto_updates true
-  depends_on macos: :sonoma
+  depends_on macos: "14.2"
+  depends_on arch: :arm64
 
   app "MacParakeet.app"
 
